@@ -14,8 +14,8 @@ int main(){
 	for (int ct=0;ct<3;ct++){
 		filas[ct]=(int *)malloc(3*sizeof(int));
 		cout<<"Fila "<<(ct+1)<<": ";
-    random=(rand() % 10)
 		for (int ct2=0;ct2<3;ct2++){
+			random=(rand() % 10);
 			*(*(filas+ct)+ct2)=(random);
 			cout<<*(*(filas+ct)+ct2)<<" ";
 		}
