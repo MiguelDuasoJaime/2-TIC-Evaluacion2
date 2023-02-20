@@ -12,14 +12,15 @@ int cuentalet(char *pnom){
 	}
 
 int main(){
-	char *plh[4];
-	char sts;
-	char *orden[4];
-	int *n_plh[4];
+	int i=4;
+	char *plh[i];
+	char *orden[i];
+	int *n_plh[i];
 	int stn;
+	char s;
 	char n1[16];
 	
-	for (int ct=0;ct<4;ct++){
+	for (int ct=0;ct<i;ct++){
 		cout<<"Introduce la palabra "<<(ct+1)<<": ";
 		cin>>n1;
 		int len=(cuentalet(n1));
@@ -33,10 +34,38 @@ int main(){
 				//cout<<" -Traslado: ("<<*(*(plh+ct)+ct2)<<") "<<endl;	
 				}
 	}
-	for (int cont=0;cont<4;cont++){
-		for (int t=0;t<3;t++){
+	
+	int maxlen;
+	int m;
+	for (int nn=0;nn<i;nn++){
+		m=0;
+		for (int n2=0;n2<i;n2++){
+			if (*(*(n_plh+nn))>=*(*(n_plh+n2))){
+				m=m+1;
+			}
+		}
+		if (m=i){
+			maxlen=*(*(n_plh+nn));
+		}
+	}
+	for (int nnn=0;nnn<i;nnn++){
+		orden[nnn]=(char *)malloc((maxlen+1)*sizeof(char));
+		for (int q=0;q<i;q++){
+			*(*(orden+nnn)+q)=*(*(plh+nnn)+q);
+		}
+	}
+	for (int cont=0;cont<i;cont++){
+		for (int t=0;t<(i-1);t++){
 			if (*(*(n_plh+t))>*(*(n_plh+t+1))){
 				stn=*(*(n_plh+t));
+				for (int p=0;p<(*(*(n_plh+t)));p++){
+					s=*(*(orden+t)+p);
+					*(*(orden+t)+p)=*(*(orden+t+1)+p)
+					*(*(orden+t+1)+p)=s
+					for (int p=(maxlen+1-(*(*(n_plh+t+1))));p<maxlen;p++){
+						*(*(orden+t)+p)=' '//Se vacía la posición sobrante
+					}
+				}
 				//orden[]=(char *)malloc((len+1)*sizeof(char));
 				//sts=*(*(plh+t)); //Se mueve el número de la longitud en la lista
 				*(*(n_plh+t))=*(*(n_plh+t+1));
@@ -46,9 +75,10 @@ int main(){
 			}
 		}	
 	}
-	for(int c=0;c<=4;c++){
+	for(int c=0;c<i;c++){
 	//	printf("%s\n",*(*(plh+c)));
-		cout<<*(*(n_plh+c))<<endl;
+		cout<<"Longitud "<<c+1<<": "<<*(*(n_plh+c))<<endl;
+		cout<<orden[c];
 	}
 	return 0;
 }
