@@ -44,13 +44,13 @@ int main(){
 				m=m+1;
 			}
 		}
-		if (m=i){
+		if (m==i){
 			maxlen=*(*(n_plh+nn));
 		}
 	}
 	for (int nnn=0;nnn<i;nnn++){
 		orden[nnn]=(char *)malloc((maxlen+1)*sizeof(char));
-		for (int q=0;q<i;q++){
+		for (int q=0;q<maxlen+1;q++){
 			*(*(orden+nnn)+q)=*(*(plh+nnn)+q);
 		}
 	}
@@ -60,25 +60,17 @@ int main(){
 				stn=*(*(n_plh+t));
 				for (int p=0;p<(*(*(n_plh+t)));p++){
 					s=*(*(orden+t)+p);
-					*(*(orden+t)+p)=*(*(orden+t+1)+p)
-					*(*(orden+t+1)+p)=s
-					for (int p=(maxlen+1-(*(*(n_plh+t+1))));p<maxlen;p++){
-						*(*(orden+t)+p)=' '//Se vacía la posición sobrante
-					}
+					*(*(orden+t)+p)=*(*(orden+t+1)+p);
+					*(*(orden+t+1)+p)=s;
 				}
-				//orden[]=(char *)malloc((len+1)*sizeof(char));
-				//sts=*(*(plh+t)); //Se mueve el número de la longitud en la lista
 				*(*(n_plh+t))=*(*(n_plh+t+1));
-				//*(*(plh+t))=*(*(plh+t+1));
 				*(*(n_plh+t+1))=stn;
-				//*(*(plh+t+1))=sts;
 			}
 		}	
 	}
 	for(int c=0;c<i;c++){
-	//	printf("%s\n",*(*(plh+c)));
 		cout<<"Longitud "<<c+1<<": "<<*(*(n_plh+c))<<endl;
-		cout<<orden[c];
+		cout<<orden[c]<<endl;
 	}
 	return 0;
 }
